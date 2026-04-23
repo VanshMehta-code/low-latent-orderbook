@@ -243,8 +243,8 @@ Inspired by production matching engines at Jane Street, Citadel, Jump Trading, a
 
 ## 📬 Contact
 
-Built by [Your Name] as part of HFT interview preparation.
+Built by Vansh Mehta as part of HFT interview preparation.
 
-[LinkedIn](your-link) | [Email](your-email)
+[LinkedIn](your-link) | [Email](vanshmehta531@gmail.com)
 
 *"The fastest code is code that doesn't run. The second fastest is code that runs from L1 cache."*
