@@ -1,0 +1,9 @@
+build/
+bin/
+*.o
+*.out
+*.exe
+.vscode/
+.idea/
+*.swp
+*~
