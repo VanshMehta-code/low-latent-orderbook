@@ -1,71 +1,53 @@
-cset: --> last message, executed args into cpuset "/user", new pid is: 16203
+cset: --> last message, executed args into cpuset "/user", new pid is: 9359
 
 ╔════════════════════════════════════════════════════╗
 ║    ORDERBOOK BENCHMARK SUITE - RDTSCP EDITION      ║
 ╚════════════════════════════════════════════════════╝
 [32m
-========== EASY BENCHMARK ==========
-[0mSimple operations, clean book, no contention
-
-[36mAdd Order (No Match):[0m
-  Min: 171 cycles
-  Avg: 193 cycles
-  P50: 178 cycles
-  P95: 222 cycles
-  P99: 386 cycles
-  Max: 14622 cycles
-
-[36mCancel Order (Head):[0m
-  Min: 125 cycles
-  Avg: 153 cycles
-  P50: 137 cycles
-  P95: 202 cycles
-  P99: 284 cycles
-  Max: 33433 cycles
-
-[36mSimple Match (1:1):[0m
-  Min: 170 cycles
-  Avg: 189 cycles
-  P50: 176 cycles
-  P95: 183 cycles
-  P99: 306 cycles
-  Max: 34667 cycles
+========== EASY BENCHMARK (BATCHED) ==========
+[0m[36mAdd Order (Batched):[0m
+  Min: 30 cycles
+  Avg: 31 cycles
+  P50: 31 cycles
+  P95: 32 cycles
+  P99: 51 cycles
+  Max: 51 cycles
 
 [33m
 ========== MEDIUM BENCHMARK ==========
 [0mMixed operations, partial fills, multi-level walks
 
 [36mPartial Fill (60/100):[0m
-  Min: 155 cycles
-  Avg: 192 cycles
-  P50: 178 cycles
-  P95: 226 cycles
-  P99: 350 cycles
-  Max: 4653 cycles
+  Min: 75 cycles
+  Avg: 97 cycles
+  P50: 89 cycles
+  P95: 108 cycles
+  P99: 123 cycles
+  Max: 34641 cycles
 
 [36mFIFO Match (4 orders):[0m
-  Min: 320 cycles
-  Avg: 334 cycles
-  P50: 326 cycles
-  P95: 357 cycles
-  P99: 552 cycles
-  Max: 2553 cycles
+  Min: 105 cycles
+  Avg: 118 cycles
+  P50: 109 cycles
+  P95: 114 cycles
+  P99: 306 cycles
+  Max: 2515 cycles
 
 [36mWalk 5 Levels:[0m
-  Min: 188 cycles
-  Avg: 199 cycles
-  P50: 193 cycles
-  P95: 209 cycles
-  P99: 367 cycles
-  Max: 1681 cycles
+  Min: 69 cycles
+  Avg: 73 cycles
+  P50: 73 cycles
+  P95: 76 cycles
+  P99: 77 cycles
+  Max: 681 cycles
 
 [36mCancel from Middle (2k queue):[0m
-  Min: 136 cycles
-  Avg: 145 cycles
-  P50: 141 cycles
-  P95: 143 cycles
-  P99: 165 cycles
-  Max: 3625 cycles
+  Min: 43 cycles
+  Avg: 52 cycles
+  P50: 49 cycles
+  P95: 64 cycles
+  P99: 76 cycles
+  Max: 903 cycles
 
 [31m
 ========== NIGHTMARE BENCHMARK ==========
@@ -73,75 +55,75 @@ cset: --> last message, executed args into cpuset "/user", new pid is: 16203
 
 [35m[1/8] Deep Book Walk - 100 levels...
 [0m[36mDeep Walk (100 levels):[0m
-  Min: 184 cycles
-  Avg: 195 cycles
-  P50: 190 cycles
-  P95: 195 cycles
-  P99: 349 cycles
-  Max: 1600 cycles
+  Min: 79 cycles
+  Avg: 104 cycles
+  P50: 97 cycles
+  P95: 125 cycles
+  P99: 177 cycles
+  Max: 1614 cycles
 
 [35m[2/8] Massive FIFO - 1000 orders...
 [0m[36mMassive FIFO (500 orders):[0m
-  Min: 25236 cycles
-  Avg: 27200 cycles
-  P50: 25691 cycles
-  P95: 34420 cycles
-  P99: 53043 cycles
-  Max: 96619 cycles
+  Min: 4977 cycles
+  Avg: 6735 cycles
+  P50: 6154 cycles
+  P95: 9110 cycles
+  P99: 23333 cycles
+  Max: 25171 cycles
 
 [35m[3/8] Cancel from Deep Middle - 10k queue...
 [0m[36mCancel Deep Middle (10k queue):[0m
-  Min: 136 cycles
-  Avg: 143 cycles
-  P50: 141 cycles
-  P95: 145 cycles
-  P99: 147 cycles
-  Max: 1918 cycles
+  Min: 45 cycles
+  Avg: 49 cycles
+  P50: 49 cycles
+  P95: 52 cycles
+  P99: 55 cycles
+  Max: 200 cycles
 
 [35m[4/8] Cache Thrashing - Alternating ops...
 [0m[36mCache Thrashing:[0m
-  Min: 121 cycles
-  Avg: 181 cycles
-  P50: 177 cycles
-  P95: 256 cycles
-  P99: 432 cycles
-  Max: 13725 cycles
+  Min: 43 cycles
+  Avg: 65 cycles
+  P50: 77 cycles
+  P95: 83 cycles
+  P99: 97 cycles
+  Max: 3911 cycles
 
 [35m[5/8] Fragmented Book - Max spread...
 [0m[36mFragmented Book:[0m
-  Min: 198 cycles
-  Avg: 253 cycles
-  P50: 223 cycles
-  P95: 362 cycles
-  P99: 381 cycles
-  Max: 16535 cycles
+  Min: 83 cycles
+  Avg: 90 cycles
+  P50: 89 cycles
+  P95: 103 cycles
+  P99: 123 cycles
+  Max: 526 cycles
 
 [35m[6/8] Worst Partials - 1 unit fills...
 [0m[36mWorst Partial (1/1000):[0m
-  Min: 152 cycles
-  Avg: 177 cycles
-  P50: 162 cycles
-  P95: 224 cycles
-  P99: 309 cycles
-  Max: 20349 cycles
+  Min: 77 cycles
+  Avg: 81 cycles
+  P50: 81 cycles
+  P95: 84 cycles
+  P99: 85 cycles
+  Max: 212 cycles
 
 [35m[7/8] Rapid Fire - 50k sequential adds...
 [0m[36mRapid Fire 50k Adds:[0m
-  Min: 180 cycles
-  Avg: 217 cycles
-  P50: 199 cycles
-  P95: 231 cycles
-  P99: 464 cycles
-  Max: 25741 cycles
+  Min: 103 cycles
+  Avg: 120 cycles
+  P50: 113 cycles
+  P95: 135 cycles
+  P99: 157 cycles
+  Max: 48722 cycles
 
 [35m[8/8] THE ULTIMATE - Pre-computed chaos...
 [0m[36mULTIMATE (50k pre-computed):[0m
-  Min: 73 cycles
-  Avg: 202 cycles
-  P50: 215 cycles
-  P95: 294 cycles
-  P99: 349 cycles
-  Max: 30126 cycles
+  Min: 39 cycles
+  Avg: 82 cycles
+  P50: 79 cycles
+  P95: 125 cycles
+  P99: 163 cycles
+  Max: 10235 cycles
 
 [31m
 🔥 Nightmare complete. Your orderbook survived. 🔥

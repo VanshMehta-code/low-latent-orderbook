@@ -16,7 +16,6 @@ order_book::order_book(order_range order_range, double current_price,
   price_list = new price_level[range];
   buy_quantity = new uint32_t[range]();
   sell_quantity = new uint32_t[range]();
-  fprintf(stderr, "---------- Project Activated ----------\n");
 }
 
 order_book::~order_book() {
@@ -24,12 +23,11 @@ order_book::~order_book() {
   delete[] buy_quantity;
   delete[] order_list;
   delete[] price_list;
-  fprintf(stderr, "---------- Project Deactivated ----------\n");
 }
 
 // Safe index conversion
 int32_t order_book::order_id_to_idx(uint32_t order_id) {
-  if (order_id < starting_order_id)
+  if (order_id < starting_order_id) [[unlikely]]
     return -1;
   uint32_t idx = order_id - starting_order_id;
   return (idx >= SIZE) ? -1 : idx;
@@ -38,7 +36,7 @@ int32_t order_book::order_id_to_idx(uint32_t order_id) {
 // Safe price conversion
 int32_t order_book::price_to_idx(double price) {
   double offset = (price - base_price) / TICK;
-  if (offset < 0 || offset >= range)
+  if (offset < 0 || offset >= range) [[unlikely]]
     return -1;
   return (int32_t)offset;
 }
@@ -79,7 +77,6 @@ uint32_t order_book::execute_buy(uint32_t quantity, uint32_t price_idx) {
     price_list[price_idx].sell_tail = -1;
   }
 
-  // NEW: Update low_ask if we cleared the best ask level
   if (sell_quantity[price_idx] == 0 && price_list[price_idx].sell_head != -1) {
     price_list[price_idx].sell_head = -1;
     price_list[price_idx].sell_tail = -1;
@@ -132,13 +129,13 @@ uint32_t order_book::execute_sell(uint32_t quantity, uint32_t price_idx) {
 void order_book::add_order(uint32_t order_id, double price, uint32_t quantity,
                            bool is_buy) {
   uint32_t price_idx = price_to_idx(price);
-  if (price_idx < 0) {
+  if (price_idx < 0) [[unlikely]] {
     return;
   }
   _mm_prefetch((const char *)&price_list[price_idx], _MM_HINT_T0);
 
   int32_t order_idx = order_id_to_idx(order_id);
-  if (order_idx < 0) {
+  if (order_idx < 0) [[unlikely]] {
     return;
   }
   _mm_prefetch((const char *)&order_list[order_idx], _MM_HINT_T0);
@@ -263,10 +260,9 @@ void order_book::execute_order(uint32_t order_id, uint32_t quantity,
 }
 
 double order_book::get_lowest_ask() {
-  // Check if current low_ask is still valid
   int32_t current_idx = price_to_idx(low_ask);
   if (current_idx >= 0 && sell_quantity[current_idx] > 0) {
-    return low_ask; // Still valid, return immediately
+    return low_ask;
   }
 
   // Need to find new low_ask
